@@ -21,8 +21,8 @@ public class Guerreiro {
         children = new HashMap<>();
     }
 
-    public Guerreiro(int land, String name) {
-        this.land = land;
+    public Guerreiro(String name) {
+        this.land = 0;
         this.name = name;
         this.pai = null;
         children = new HashMap<>();
