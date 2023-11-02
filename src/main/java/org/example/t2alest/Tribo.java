@@ -21,4 +21,6 @@ public class Tribo {
         g.getPai().nSons =+ 1;
         g.getPai().addFilho(g);
     }
+
+
 }

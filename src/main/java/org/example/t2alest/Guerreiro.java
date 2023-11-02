@@ -8,44 +8,45 @@ import java.util.Set;
 
 @Data
 public class Guerreiro {
+
     Guerreiro pai;
     int land;
     int nSons;
     String name;
-    HashMap<String, Guerreiro> children;
+    ArrayList<Guerreiro> children;
 
-    public Guerreiro(Guerreiro pai, int land, String name) {
-        this.land = land;
+        /*
+        public Guerreiro(Guerreiro pai, int land, String name) {
+            this.land = land;
+            this.name = name;
+            this.pai = pai;
+            children = new ArrayList<>();
+        }
+
+
+         */
+        /*
+        public Guerreiro(int land, String name) {
+            this.land = land;
+            this.name = name;
+            this.pai = null;
+            children = new ArrayList<>();
+        }
+
+         */
+
+    public Guerreiro (String name) {
         this.name = name;
-        this.pai = pai;
-        children = new HashMap<>();
+        children = new ArrayList<>();
     }
 
-    public Guerreiro(int land, String name) {
-        this.land = land;
-        this.name = name;
-        this.pai = null;
-        children = new HashMap<>();
-    }
 
     public void giveLand(){
         int heranca = pai.land/pai.nSons;
         land = land + heranca;
     }
 
-    public void addFilho(Guerreiro g){
-        children.put(g.getName(), g);
+
+    public void addChild (Guerreiro x) {
+
     }
-
-    public void giveLandTest(){
-        for (String g: children.keySet()) {
-            Guerreiro atual = children.get(g);
-
-        }
-
-        int heranca = pai.land/pai.nSons;
-        land = land + heranca;
-    }
-}
-
-
