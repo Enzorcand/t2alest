@@ -15,8 +15,10 @@ public class Tribo {
         povo.put(raiz.getName(), raiz);
     }
 
+
     public void addPeople(Guerreiro g){
         povo.put(g.name, g);
         g.getPai().nSons =+ 1;
+        g.getPai().addFilho(g);
     }
 }

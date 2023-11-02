@@ -24,4 +24,17 @@ class TriboTest {
         Assertions.assertEquals(10, y.getLand());
     }
 
+    @Test
+    void rootHas3Sons(){
+        Tribo tribo = new Tribo(5, "x");
+        Guerreiro pai = tribo.getPovo().get("x");
+        Guerreiro w = new Guerreiro(pai, 5, "w");
+        tribo.addPeople(w);
+        Guerreiro y = new Guerreiro(pai, 5, "y");
+        tribo.addPeople(y);
+        Guerreiro z = new Guerreiro(pai, 5, "z");
+        tribo.addPeople(z);
+        Assertions.assertEquals(3, tribo.getRaiz().getNSons());
+    }
+
 }
