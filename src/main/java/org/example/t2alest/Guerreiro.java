@@ -42,22 +42,24 @@ public class Guerreiro {
 
     public void giveLand(){
         int heranca = pai.land/pai.nSons;
-        land = land + heranca;
+        Guerreiro g;
+        Set<String> child = children.keySet();
+        for (String s: child) {
+            g = children.get(s);
+            g.land = land + heranca;
+        }
     }
 
 
     public void addFilho(Guerreiro g){
+        nSons++;
         children.put(g.getName(), g);
     }
 
-    public void giveLandTest(){
-        for (String g: children.keySet()) {
-            Guerreiro atual = children.get(g);
-
-        }
-
-        int heranca = pai.land/pai.nSons;
-        land = land + heranca;
+    public void printLandDepth(){
+        System.out.println(land);
+        System.out.println(depth);
+        System.out.println(name);
     }
 }
 

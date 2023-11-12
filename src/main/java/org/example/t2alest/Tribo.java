@@ -25,6 +25,7 @@ public class Tribo {
         raiz = null;
         povo = new HashMap<>();
         registerPovo();
+        getTriboDepth();
     }
 
     public void registerPovo () throws FileNotFoundException {
@@ -55,6 +56,16 @@ public class Tribo {
         addRaiz();
     }
 
+    public void distributeLand(){
+        Set<String> set = povo.keySet();
+        for (String s:
+             set) {
+            if(!povo.get(s).children.isEmpty()) {
+                povo.get(s).giveLand();
+            }
+        }
+    }
+
     public void getTriboDepth(){
         Set<String> people = povo.keySet();
         Guerreiro g;
@@ -68,7 +79,6 @@ public class Tribo {
 
     public void addPeople(Guerreiro g){
         povo.put(g.name, g);
-        g.getPai().nSons++;
         g.getPai().addFilho(g);
     }
 
@@ -80,5 +90,31 @@ public class Tribo {
                 g.setLand(terrasRaiz);
             }
         }
+    }
+
+    public Guerreiro getMostRich(){
+        Guerreiro richest = raiz;
+        Guerreiro g;
+        int maxLand = raiz.land;
+        int maxDepth = raiz.depth;
+        Set<String> set = povo.keySet();
+        for (String s : set) {
+            g = povo.get(s);
+            if(g.depth > maxDepth){
+                richest = g;
+                maxDepth = g.depth;
+                maxLand = g.land;
+            } else if(g.depth == maxDepth){
+                if(g.land > maxLand){
+                    richest = g;
+                    maxLand = g.land;
+                }
+            }
+        }
+        return richest;
+    }
+
+    public void printMostRich(){
+
     }
 }

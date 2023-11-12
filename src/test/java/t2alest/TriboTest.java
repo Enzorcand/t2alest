@@ -37,4 +37,11 @@ class TriboTest {
         Assertions.assertEquals(3, tribo.getRaiz().getNSons());
     }
 
+    @Test
+    void finalTest(){
+        Tribo tribo = new Tribo();
+        Guerreiro g = tribo.getMostRich();
+        g.printLandDepth();
+    }
+
 }
