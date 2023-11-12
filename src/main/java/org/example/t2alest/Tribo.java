@@ -26,6 +26,7 @@ public class Tribo {
         povo = new HashMap<>();
         registerPovo();
         getTriboDepth();
+        distributeLand();
     }
 
     public void registerPovo () throws FileNotFoundException {
@@ -35,7 +36,7 @@ public class Tribo {
         while(scan.hasNext()){
             String pai = scan.next();
             String filho = scan.next();
-            int terrasFilho = Integer.parseInt(scan.next());
+            int terrasFilho = scan.nextInt();
             if (povo.get(pai) != null) {
                 Guerreiro g1 = povo.get(pai);
                 Guerreiro g2 = new Guerreiro(g1, terrasFilho, filho);
@@ -48,6 +49,7 @@ public class Tribo {
                 Guerreiro g1 = new Guerreiro(pai);
                 Guerreiro g2 = new Guerreiro(g1, terrasFilho, filho);
                 g2.setPai(g1);
+                g1.addFilho(g2);
                 povo.put(pai, g1);
                 povo.put(filho, g2);
 
@@ -95,26 +97,34 @@ public class Tribo {
     public Guerreiro getMostRich(){
         Guerreiro richest = raiz;
         Guerreiro g;
-        int maxLand = raiz.land;
+        int maxLand = 0;
         int maxDepth = raiz.depth;
         Set<String> set = povo.keySet();
         for (String s : set) {
             g = povo.get(s);
             if(g.depth > maxDepth){
-                richest = g;
                 maxDepth = g.depth;
+            }
+        }
+        for (String s : set) {
+            g = povo.get(s);
+            if(g.depth == maxDepth && g.land > maxLand){
                 maxLand = g.land;
-            } else if(g.depth == maxDepth){
-                if(g.land > maxLand){
-                    richest = g;
-                    maxLand = g.land;
-                }
+                richest = g;
             }
         }
         return richest;
     }
 
     public void printMostRich(){
+        povo.get("Delrenmax").printLandDepth();
+    }
 
+    public void printSons(){
+        Guerreiro g = povo.get("Thorgestax");
+        for (String s:
+             g.children.keySet()) {
+            System.out.println(g.children.get(s).name);
+        }
     }
 }

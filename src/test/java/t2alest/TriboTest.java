@@ -42,6 +42,7 @@ class TriboTest {
         Tribo tribo = new Tribo();
         Guerreiro g = tribo.getMostRich();
         g.printLandDepth();
+        tribo.printMostRich();
     }
 
 }

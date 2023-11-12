@@ -41,12 +41,12 @@ public class Guerreiro {
     }
 
     public void giveLand(){
-        int heranca = pai.land/pai.nSons;
+        int heranca = land/nSons;
         Guerreiro g;
         Set<String> child = children.keySet();
         for (String s: child) {
             g = children.get(s);
-            g.land = land + heranca;
+            g.land = g.land + heranca;
         }
     }
 
@@ -60,6 +60,8 @@ public class Guerreiro {
         System.out.println(land);
         System.out.println(depth);
         System.out.println(name);
+        System.out.println(pai.name);
+        System.out.println(nSons);
     }
 }
 
