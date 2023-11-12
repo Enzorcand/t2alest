@@ -5,9 +5,9 @@ import lombok.SneakyThrows;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.util.HashMap;
 import java.util.Scanner;
+import java.util.Set;
 
 @Data
 public class Tribo {
@@ -28,7 +28,7 @@ public class Tribo {
     }
 
     public void registerPovo () throws FileNotFoundException {
-        Scanner scan = new Scanner(new FileReader("tribo.txt"));
+        Scanner scan = new Scanner(new FileInputStream("src/main/java/org/example/t2alest/tribo.txt"));
         terrasRaiz = scan.nextInt();
 
         while(scan.hasNext()){
@@ -52,14 +52,23 @@ public class Tribo {
 
             }
         }
-
         addRaiz();
     }
+
+    public void getTriboDepth(){
+        Set<String> people = povo.keySet();
+        Guerreiro g;
+        for (String s: people) {
+            g = povo.get(s);
+            g.getDepthValue();
+        }
+    }
+
 
 
     public void addPeople(Guerreiro g){
         povo.put(g.name, g);
-        g.getPai().nSons =+ 1;
+        g.getPai().nSons++;
         g.getPai().addFilho(g);
     }
 

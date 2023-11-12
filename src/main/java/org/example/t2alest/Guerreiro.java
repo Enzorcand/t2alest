@@ -11,6 +11,7 @@ public class Guerreiro {
     Guerreiro pai;
     int land;
     int nSons;
+    int depth;
     String name;
     HashMap<String, Guerreiro> children;
 
@@ -18,6 +19,7 @@ public class Guerreiro {
         this.land = land;
         this.name = name;
         this.pai = pai;
+        nSons = 0;
         children = new HashMap<>();
     }
 
@@ -25,13 +27,24 @@ public class Guerreiro {
         this.land = 0;
         this.name = name;
         this.pai = null;
+        nSons = 0;
         children = new HashMap<>();
+    }
+
+    public void getDepthValue(){
+        depth = 0;
+        Guerreiro top = pai;
+        while(top != null){
+            depth++;
+            top = top.getPai();
+        }
     }
 
     public void giveLand(){
         int heranca = pai.land/pai.nSons;
         land = land + heranca;
     }
+
 
     public void addFilho(Guerreiro g){
         children.put(g.getName(), g);

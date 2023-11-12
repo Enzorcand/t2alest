@@ -10,7 +10,7 @@ class TriboTest {
 
     @Test
     void raizExists(){
-        Tribo tribo = new Tribo(10, "x");
+        Tribo tribo = new Tribo();
         assert(tribo.getRaiz() != null);
     }
 
