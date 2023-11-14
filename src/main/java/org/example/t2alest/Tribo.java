@@ -59,14 +59,34 @@ public class Tribo {
     }
 
     public void distributeLand(){
-        Set<String> set = povo.keySet();
-        for (String s:
-             set) {
-            if(!povo.get(s).children.isEmpty()) {
-                povo.get(s).giveLand();
+
+        if(!raiz.getChildren().isEmpty()){
+            raiz.giveLand();
+            Set<String> set = raiz.getChildren().keySet();
+            Guerreiro g;
+            for (String s:
+                 set) {
+                g = raiz.getChildren().get(s);
+                distributeLand0(g);
+            }
+
+        }
+    }
+
+    public void distributeLand0(Guerreiro g){
+
+        if(!g.getChildren().isEmpty()){
+            g.giveLand();
+            Set<String> set = g.getChildren().keySet();
+            Guerreiro g2;
+            for (String s:
+                    set) {
+                g2 = g.getChildren().get(s);
+                distributeLand0(g2);
             }
         }
     }
+
 
     public void getTriboDepth(){
         Set<String> people = povo.keySet();
@@ -80,7 +100,7 @@ public class Tribo {
 
 
     public void addPeople(Guerreiro g){
-        povo.put(g.name, g);
+        povo.put(g.getName(), g);
         g.getPai().addFilho(g);
     }
 
@@ -98,18 +118,18 @@ public class Tribo {
         Guerreiro richest = raiz;
         Guerreiro g;
         int maxLand = 0;
-        int maxDepth = raiz.depth;
+        int maxDepth = raiz.getDepth();
         Set<String> set = povo.keySet();
         for (String s : set) {
             g = povo.get(s);
-            if(g.depth > maxDepth){
-                maxDepth = g.depth;
+            if(g.getLand() > maxDepth){
+                maxDepth = g.getDepth();
             }
         }
         for (String s : set) {
             g = povo.get(s);
-            if(g.depth == maxDepth && g.land > maxLand){
-                maxLand = g.land;
+            if(g.getDepth() == maxDepth && g.getLand() > maxLand){
+                maxLand = g.getLand();
                 richest = g;
             }
         }
@@ -117,14 +137,17 @@ public class Tribo {
     }
 
     public void printMostRich(){
-        povo.get("Delrenmax").printLandDepth();
+        povo.get("Deldriralex").printLandDepth();
     }
 
-    public void printSons(){
-        Guerreiro g = povo.get("Thorgestax");
-        for (String s:
-             g.children.keySet()) {
-            System.out.println(g.children.get(s).name);
+    public void printSons(String s){
+
+        Guerreiro g = povo.get(s);
+        for (String s1 : g.getChildren().keySet()) {
+            System.out.print(g.getChildren().get(s1).getName() + " ");
+            System.out.println(g.getChildren().get(s1).getLand());
         }
+        System.out.println(g.getNSons());
+        System.out.println(g.getLand());
     }
 }

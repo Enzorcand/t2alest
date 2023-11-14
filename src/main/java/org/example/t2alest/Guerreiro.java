@@ -9,11 +9,11 @@ import java.util.Set;
 @Data
 public class Guerreiro {
     Guerreiro pai;
-    int land;
-    int nSons;
-    int depth;
-    String name;
-    HashMap<String, Guerreiro> children;
+    private int land;
+    private int nSons;
+    private int depth;
+    private String name;
+    private HashMap<String, Guerreiro> children;
 
     public Guerreiro(Guerreiro pai, int land, String name) {
         this.land = land;
@@ -46,7 +46,7 @@ public class Guerreiro {
         Set<String> child = children.keySet();
         for (String s: child) {
             g = children.get(s);
-            g.land = g.land + heranca;
+            g.setLand(g.getLand() + heranca);
         }
     }
 
