@@ -11,6 +11,7 @@ import java.util.Set;
 
 @Data
 public class Tribo {
+    private String nomeTribo;
     private Guerreiro raiz;
     private int terrasRaiz;
     private HashMap<String, Guerreiro> povo;
@@ -22,12 +23,26 @@ public class Tribo {
     }
     @SneakyThrows
     public Tribo() {
+        nomeTribo = null;
         raiz = null;
         povo = new HashMap<>();
         registerPovo();
         getTriboDepth();
         distributeLand();
     }
+
+    @SneakyThrows
+    public Tribo(String nomeTribo) {
+        this.nomeTribo = nomeTribo;
+        raiz = null;
+        povo = new HashMap<>();
+        //registerPovo();
+        registerOtherPovo();
+        getTriboDepth();
+        distributeLand();
+    }
+
+
 
     public void registerPovo () throws FileNotFoundException {
         Scanner scan = new Scanner(new FileInputStream("src/main/java/org/example/t2alest/tribo.txt"));
@@ -57,6 +72,37 @@ public class Tribo {
         }
         addRaiz();
     }
+
+
+    public void registerOtherPovo () throws FileNotFoundException {
+        Scanner scan = new Scanner(new FileInputStream("src/main/java/org/example/t2alest/OtherTribo.txt"));
+        terrasRaiz = scan.nextInt();
+
+        while(scan.hasNext()){
+            String pai = scan.next();
+            String filho = scan.next();
+            int terrasFilho = scan.nextInt();
+            if (povo.get(pai) != null) {
+                Guerreiro g1 = povo.get(pai);
+                Guerreiro g2 = new Guerreiro(g1, terrasFilho, filho);
+                g1.addFilho(g2);
+                g2.setPai(g1);
+                povo.put(filho, g2);
+
+            } else {
+
+                Guerreiro g1 = new Guerreiro(pai);
+                Guerreiro g2 = new Guerreiro(g1, terrasFilho, filho);
+                g2.setPai(g1);
+                g1.addFilho(g2);
+                povo.put(pai, g1);
+                povo.put(filho, g2);
+            }
+        }
+        addRaiz();
+
+    }
+
 
     public void distributeLand(){
 
@@ -139,6 +185,9 @@ public class Tribo {
     public void printMostRich(){
         povo.get("Deldriralex").printLandDepth();
     }
+
+
+
 
     public void printSons(String s){
 
