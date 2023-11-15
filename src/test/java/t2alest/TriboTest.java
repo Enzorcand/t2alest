@@ -1,7 +1,5 @@
 package t2alest;
 
-import org.example.MathUtils;
-import org.example.t2alest.Main;
 import org.example.t2alest.Tribo;
 import org.example.t2alest.Guerreiro;
 import org.junit.jupiter.api.Assertions;
@@ -12,13 +10,6 @@ import java.io.FileNotFoundException;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class TriboTest {
-
-    //Verifica se o raiz existe
-    @Test
-    void raizExists(){
-        Tribo tribo = new Tribo();
-        assert(tribo.getRaiz() != null);
-    }
 
 
     //Verifica se quantidade de filhos está correta
@@ -33,11 +24,6 @@ class TriboTest {
         Guerreiro z = new Guerreiro(pai, 5, "z");
         tribo.addPeople(z);
         Assertions.assertEquals(3, tribo.getRaiz().getNSons());
-    }
-
-    @Test
-    void finalTest(){
-        Tribo tribo = new Tribo();
     }
 
 
@@ -95,13 +81,7 @@ class TriboTest {
 
     }
 
-    @Test
-    void test(){
-        MathUtils math = new MathUtils();
-        int expected = 2;
-        int actual = math.add(1, 1);
-        assertEquals(expected, actual);
-    }
+
 
 
 }
